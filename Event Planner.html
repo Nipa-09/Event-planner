@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Planner</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      color: #333;
+    }
+    header {
+      background: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 1em;
+    }
+    .container {
+      padding: 2em;
+    }
+    .section {
+      background: white;
+      padding: 2em;
+      margin-bottom: 2em;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    input, select, textarea, button {
+      display: block;
+      width: 100%;
+      margin: 0.5em 0 1em;
+      padding: 0.8em;
+      font-size: 1em;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Event Planning Services</h1>
+    <p>Creating unforgettable events, tailored to your vision</p>
+  </header>
+
+  <div class="container">
+    <div class="section" id="budget-calculator">
+      <h2>Budget Calculator</h2>
+      <label for="event-type">Event Type:</label>
+      <select id="event-type">
+        <option value="wedding">Wedding</option>
+        <option value="corporate">Corporate Event</option>
+        <option value="birthday">Birthday Party</option>
+        <option value="custom">Custom Event</option>
+      </select>
+      
+      <label for="guests">Number of Guests:</label>
+      <input type="number" id="guests" placeholder="Enter number of guests" />
+
+      <label for="venue-cost">Venue Cost ($):</label>
+      <input type="number" id="venue-cost" placeholder="e.g., 2000" />
+
+      <label for="catering-cost">Catering Cost per Guest ($):</label>
+      <input type="number" id="catering-cost" placeholder="e.g., 25" />
+
+      <label for="entertainment-cost">Entertainment Cost ($):</label>
+      <input type="number" id="entertainment-cost" placeholder="e.g., 800" />
+
+      <button onclick="calculateBudget()">Calculate Total Budget</button>
+      <h3 id="budget-result">Total Budget: $0</h3>
+    </div>
+
+    <div class="section" id="contact-form">
+      <h2>Book a Consultation</h2>
+      <form onsubmit="submitForm(event)">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required />
+
+        <label for="message">Message:</label>
+        <textarea id="message" rows="5" placeholder="Tell us about your event..."></textarea>
+
+        <button type="submit">Submit</button>
+      </form>
+      <p id="form-response"></p>
+    </div>
+  </div>
+ 
+  <script>
+    function calculateBudget() {
+      const guests = parseInt(document.getElementById('guests').value) || 0;
+      const venue = parseFloat(document.getElementById('venue-cost').value) || 0;
+      const catering = parseFloat(document.getElementById('catering-cost').value) || 0;
+      const entertainment = parseFloat(document.getElementById('entertainment-cost').value) || 0;
+
+      const total = venue + (guests * catering) + entertainment;
+      document.getElementById('budget-result').innerText = `Total Budget: $${total.toFixed(2)}`;
+    }
+
+    function submitForm(event) {
+      event.preventDefault();
+      document.getElementById('form-response').innerText = 'Thank you! We will contact you soon.';
+    }
+  </script>
+</body>
+</html>
